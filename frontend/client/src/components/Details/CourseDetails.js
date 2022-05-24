@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
+import { courseListData, courseDetailsData } from '../../API/api.js';
 
 import useStyles from './styles.js';
 
@@ -9,11 +10,20 @@ const CourseDetails = ({ course, selected, refProp }) => {
   if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const classes = useStyles();
 
+   const [ details, setDetails ] = useState( {} );
+
+  useEffect( () => {
+    courseDetailsData(course)
+    .then( (details) => {
+      setDetails(details)
+});
+}, [course])
+
   return (
     <Card elevation={6}>
       <CardMedia
         style={{ height: 350 }}
-        image={ course.photo ? course.photo.images.large.url : 'https://www.pebblebeach.com/content/uploads/pbgl-7thhole-wave-bartkeagy-1-1067x600.jpg'} alt={ "image" } title={course.name}
+        image={ details ? course.photo.images.large.url : 'https://www.pebblebeach.com/content/uploads/pbgl-7thhole-wave-bartkeagy-1-1067x600.jpg'} alt={ "image" } title={course.name}
       />
       <CardContent>
         <Typography gutterBottom variant="h5">{course.name}</Typography>
@@ -33,11 +43,6 @@ const CourseDetails = ({ course, selected, refProp }) => {
             {course.address}
           </Typography>
         )}
-        {course.phone && (
-          <Typography variant="body2" color="textSecondary" className={classes.spacing}>
-             {course.phone}
-          </Typography>
-        )}
       </CardContent>
       <CardActions>
         <Button size="small" color="primary" onClick={() => window.open(course.web_url, '_blank')}>
@@ -52,3 +57,7 @@ const CourseDetails = ({ course, selected, refProp }) => {
 };
 
 export default CourseDetails;
+
+
+
+

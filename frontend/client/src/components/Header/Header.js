@@ -16,14 +16,14 @@ const Header = ({ onPlaceChanged, onLoad }) => {
         </Typography>
         <Box display="flex">
           <Typography variant="h6" className={classes.title}>
-            Explore new places
+            Search Location or Course Name 🏌🏼‍♀️
           </Typography>
           <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase placeholder="Search…" classes={{ root: classes.inputRoot, input: classes.inputInput }} />
+              <InputBase placeholder="⛳️..⛳️" classes={{ root: classes.inputRoot, input: classes.inputInput }} />
             </div>
           </Autocomplete>
         </Box>
@@ -33,3 +33,6 @@ const Header = ({ onPlaceChanged, onLoad }) => {
 };
 
 export default Header;
+
+// git branch -M main
+// git push -u origin main
