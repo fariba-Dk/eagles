@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "create-react-app": "^5.0.0"
+  },
+  "name": "eagle",
+  "description": "Create full stack apps with React and Express. Run your client, server and do a restart of your dump db to have a full-stack project working in minutes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fariba-dk",
+  "license": "ISC"
+}
