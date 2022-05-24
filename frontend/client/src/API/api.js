@@ -11,6 +11,7 @@ export const courseListData = async (radius = 5, lat, lng) => {
       'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_GETGOLF_API_KEY
     }
   } )
+  console.log(data)
   return data
 }
 

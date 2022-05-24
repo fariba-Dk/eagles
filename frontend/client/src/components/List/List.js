@@ -41,7 +41,8 @@ const List = ({ courses, type, setType, rating, setRating, childClicked, isLoadi
           <Grid container spacing={3} className={classes.list}>
             {courses?.map((course, i) => (
               <Grid ref={elRefs[i]} key={i} item xs={12}>
-                <CourseDetails selected={Number(childClicked) === i} refProp={elRefs[i]} course={course} />
+                <CourseDetails selected={ Number( childClicked ) === i } refProp={ elRefs[ i ] } course={ course } />
+                
               </Grid>
             ))}
           </Grid>

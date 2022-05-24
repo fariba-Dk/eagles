@@ -1,46 +1,38 @@
-import React, {useEffect,useState} from 'react';
-import { Paper, Typography } from '@material-ui/core';
+
+import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import {
+import { Paper, Typography, useMediaQuery } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
 
-  useLoadScript,
+import mapStyles from '../../mapStyles';
+import useStyles from './styles.js';
 
-} from "@react-google-maps/api";
 
-import '../../index.css'
-import useStyles from '../Map/styles';
-const libraries = ["courses"];
-
-const Map = ({ coords, setCoords, setChildClicked, courses, details, weatherData}) => {
+const Map = ({ coordinates, setCoordinates, coords, setCoords, setChildClicked, courses, details}) => {
 
   const classes = useStyles();
-  const { isLoaded, loadError } = useLoadScript( {
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
-libraries,
-  } );
-
-  if ( loadError ) return "Error loading maps"
-  if ( !isLoaded ) return "Loading Maps..."
 
   return (
     <>
     <div className={classes.mapContainer}>
-      <GoogleMapReact
-        defaultCenter={ coords }
-        id="map"
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
+       defaultCenter={coords}
         center={coords}
-        defaultZoom={12}
+        defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        options={''}
-        // onClick={ onMapClick }
-        onChange={ ( e ) => {
-            setCoords( { lat: e.center.lat, lng: e.center.lng } )
-          } }
+        options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
+        onChange={(e) => {
+          setCoords({ lat: e.center.lat, lng: e.center.lng });
+
+        }}
         onChildClick={(child) => setChildClicked(child)}
-        >{ courses?.map( ( course, i ) =>(
-          <div className={classes.markerContainer}
-            lat={coords.lat}
-            lng={coords.lng }
+      >
+        {courses.length && courses.map((course, i) => (
+          <div
+            className={classes.markerContainer}
+            lat={Number(course.latitude)}
+            lng={Number(course.longitude)}
             key={i}
           >⛳️</div>
         ) ) }

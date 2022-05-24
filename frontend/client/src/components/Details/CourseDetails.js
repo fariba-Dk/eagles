@@ -12,23 +12,18 @@ const CourseDetails = ({ course, selected, refProp }) => {
 
    const [ details, setDetails ] = useState( {} );
 
-  useEffect( () => {
-    courseDetailsData(course)
-    .then( (details) => {
-      setDetails(details)
-});
-}, [course])
 
   return (
     <Card elevation={6}>
       <CardMedia
+        title={course.name}
         style={{ height: 350 }}
-        image={ details ? course.photo.images.large.url : 'https://www.pebblebeach.com/content/uploads/pbgl-7thhole-wave-bartkeagy-1-1067x600.jpg'} alt={ "image" } title={course.name}
+        image={ course.photo ? course.photo.images.large.url: 'https://www.pebblebeach.com/content/uploads/pbgl-7thhole-wave-bartkeagy-1-1067x600.jpg'} alt={ "image" } title={course.name}
       />
       <CardContent>
         <Typography gutterBottom variant="h5">{course.name}</Typography>
         <Box display="flex" justifyContent="space-between" my={2}>
-          <Rating name="read-only" value={course.rating} readOnly />
+          <Rating name="read-only" value={Number(course.rating)} readOnly />
           <Typography component="legend">{course.num_reviews} review{course.num_reviews > 1 && 's'}</Typography>
         </Box>
         <Box display="flex" justifyContent="space-between">
