@@ -10,29 +10,16 @@ const CourseDetails = ({ course, selected, refProp }) => {
   if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const classes = useStyles();
 
-   const [ details, setDetails ] = useState( {} );
-
-
   return (
     <Card elevation={6}>
       <CardMedia
-        title={course.name}
-        style={{ height: 350 }}
-        image={ course.photo ? course.photo.images.large.url: 'https://www.pebblebeach.com/content/uploads/pbgl-7thhole-wave-bartkeagy-1-1067x600.jpg'} alt={ "image" } title={course.name}
+        style={ { height: 350 } }
+        images={ course.photo ? course.photo.images.large.url : 'https://www.pebblebeach.com/content/uploads/pbgl-7thhole-wave-bartkeagy-1-1067x600.jpg'} alt={ "image" }
       />
       <CardContent>
         <Typography gutterBottom variant="h5">{course.name}</Typography>
-        <Box display="flex" justifyContent="space-between" my={2}>
-          <Rating name="read-only" value={Number(course.rating)} readOnly />
-          <Typography component="legend">{course.num_reviews} review{course.num_reviews > 1 && 's'}</Typography>
-        </Box>
-        <Box display="flex" justifyContent="space-between">
-
-        </Box>
-
-        {course?.map(({ name }) => (
-          <Chip key={name} size="small" label={name} className={classes.chip} />
-        ))}
+        <Box display="flex" justifyContent="space-between"></Box>
+        { course?.map( ( { name } ) => ( <Chip key={ name } size="small" label={ name } className={ classes.chip } /> ) ) }
         {course.address && (
           <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
             {course.address}

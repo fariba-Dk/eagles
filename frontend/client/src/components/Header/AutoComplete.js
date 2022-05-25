@@ -3,7 +3,6 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
-import { courseListData, courseDetailsData } from './API/api.js';
 
 export default function AutoComplete({ onPlaceChanged, onLoad }){
   const [address, setAddress] = React.useState("");
@@ -19,7 +18,7 @@ export default function AutoComplete({ onPlaceChanged, onLoad }){
       setAddress( value );
       setCoordinates( latLng );
       onPlaceChanged( latLng );
-
+      console.log('value===>', value)
     } catch ( err ) {
       console.log(err)
     }
@@ -34,26 +33,20 @@ export default function AutoComplete({ onPlaceChanged, onLoad }){
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-
             <input styles={{}} {...getInputProps({ placeholder: "Search..." })} />
-
             <div>
               {loading ? <div>...loading</div> : null}
-
               {suggestions.map(suggestion => {
                 const style = {
                   backgroundColor: suggestion.active ? "orange" : "#197019"
                 };
-
                 return (
                   <div {...getSuggestionItemProps(suggestion, { style })}>
                     {suggestion.description}
                   </div>
-
                 );
               } ) }
-              <h6>Latitude: { coordinates.lat } {"   "}Longitude: { coordinates.lng }</h6>
-
+              <h6>Lat: { coordinates.lat } {"   "}Lng: { coordinates.lng }</h6>
             </div>
           </div>
         )}
